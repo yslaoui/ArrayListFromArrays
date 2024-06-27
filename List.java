@@ -28,12 +28,7 @@ public class List<T> {
     }
 
     public boolean contains(T value) {
-        for (int i=0; i< this.firstFreeIndex; i++) {
-            if (this.values[i].equals(value)) {
-                return true;
-            }
-        }
-        return false;
+        return this.indexOfValue(value) >= 0;
     }
 
     private int indexOfValue(T value) {
@@ -63,8 +58,15 @@ public class List<T> {
         this.moveToTheLeft(indexOfValue);
     }
 
-    public int getFirstFreeIndex() {
+    public int size() {
         return this.firstFreeIndex;
+    }
+
+    public T value(int index) {
+        if (index < 0 || index >= this.firstFreeIndex) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " is out of bounds");
+        }
+        return this.values[index];
     }
 
     @Override
